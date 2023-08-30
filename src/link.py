@@ -8,8 +8,8 @@ link = pylink.jlink()
 def lEndian(mNum, speed):
     try: 
         link.connect(mNum, speed)
-    except JLinkException:
-        print("Connection Failed")
+   # except JLinkException:
+    #    print("Connection Failed")
     except TypeError:
         print("Speed invalid")
     finally:
