@@ -6,7 +6,7 @@ import csv
 
 
 def lEndian(mNum, speed):
-    link = pylink.jlink()
+    link = pylink.JLink()
     try: 
         link.connect(mNum, speed)
    # except JLinkException:
@@ -22,13 +22,13 @@ def lEndian(mNum, speed):
     link.close()
 
 def info(mNum, speed):
-   link = pylink.jlink()
+   nlink = pylink.JLink()
    information = ''
-   link.connect(mNum, speed)
-   information.append(link.core_cpu())
-   information.append(link.core_id())
-   information.append(link.core_name())
-   link.close()
+   nlink.connect(mNum, speed)
+   information.append(nlink.core_cpu())
+   information.append(nlink.core_id())
+   information.append(nlink.core_name())
+   nlink.close()
    return information
 
     
@@ -37,7 +37,7 @@ def bEndian(mNum, speed):
     pass
 
 def output(mNum, stream):
-    link = pylink.jlink()
+    link = pylink.JLink()
     filename = mNum
     filename.append('.bin')
     f = open(filename)
