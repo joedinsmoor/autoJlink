@@ -20,7 +20,7 @@ def compare_files(file1, file2):
             return f1.read() == f2.read()
 
 
-def testAutoJlink():
+def testAutoJlink(copy_file, compare_files):
     src_file = 'AB-L18ER.bin'
     dest_file = 'testCPU.bin'
 
