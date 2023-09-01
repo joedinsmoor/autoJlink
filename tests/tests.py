@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import sys
 sys.path.append('./src')
-from link import *
+from link import * #ignore errors here, the above line fixes this issue
 
 @pytest.fixture(scope="module")
 
