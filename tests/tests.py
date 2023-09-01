@@ -3,8 +3,8 @@ import pylink
 from os.path import exists
 import os
 from pathlib import Path
-parent_dir = os.path.split(os.getcwd())[0]
-os.chdir(parent_dir)
+import sys
+sys.path.append('../src')
 from src.link import *
 
 @pytest.fixture(scope="module")
