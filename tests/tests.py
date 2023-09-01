@@ -10,8 +10,8 @@ from link import *
 @pytest.fixture(scope="module")
 
 def copy_file(src_path, dest_path):
-    with open('AB-L18ER.bin', 'rb') as src_file:
-        with open('testCPU.bin', 'wb') as dest_file:
+    with open(src_path, 'rb') as src_file:
+        with open(dest_path, 'wb') as dest_file:
             dest_file.write(src_file.read())
 
 def compare_files(file1, file2):
@@ -21,7 +21,8 @@ def compare_files(file1, file2):
 
 
 def autoJlinkAnswer(temp_files):
-    src_file, dest_file = temp_files
+    src_file = 'AB-L18ER.bin'
+    dest_file = 'testCPU.bin'
 
     copy_file(src_file, dest_file)
     assert compare_files(src_file, dest_file), "Copied contents are not the same."
