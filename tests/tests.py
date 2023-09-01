@@ -4,7 +4,7 @@ from os.path import exists
 import os
 from pathlib import Path
 import sys
-sys.path.append('../src')
+sys.path.append('./src')
 from link import *
 
 @pytest.fixture(scope="module")
