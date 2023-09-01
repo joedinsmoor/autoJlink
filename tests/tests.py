@@ -1,6 +1,9 @@
 import pytest
 import pylink
-import os
+from os.path import exists
+from pathlib import Path
+import sys
+sys.path.append('./src')
 from src.link import *
 
 @pytest.fixture(scope="module")
