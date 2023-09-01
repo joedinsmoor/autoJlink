@@ -43,5 +43,6 @@ def output(mNum, stream):
     f = open(filename)
     f.write(stream)
     link.close()
+    return True
 
 

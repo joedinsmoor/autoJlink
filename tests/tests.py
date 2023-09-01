@@ -17,6 +17,6 @@ def autoJlinkTest(filename):
     return(output(model, binary))
 
 
-def autoJlinkAnswer():
-    file_exists = exists('/tests/testCPU.bin')
-    assert file_exists
+def autoJlinkAnswer(autoJlinkTest):
+    exists = autoJlinkTest('testCPU', 'AB-L18ER')
+    assert exists
