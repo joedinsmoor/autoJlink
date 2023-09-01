@@ -1,7 +1,7 @@
 import pytest
 import pylink
 import os
-from link import *
+from src.link import *
 
 @pytest.fixture(scope="module")
 def autoJlinkTest(filename):
