@@ -11,3 +11,10 @@ if speed == '':
 
 print(info(modelNum, speed))
 
+answer = input("Read Memory? (y/n)")
+if answer == 'yes':
+    lEndian(modelNum, speed)
+else:
+    exit()
+
+

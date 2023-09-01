@@ -14,9 +14,14 @@ def lEndian(mNum, speed):
         print("Speed invalid")
     finally:
         pass
+    if link.target_connected:
+        link.memory_read(0,0xF0000000)
+    else:
+        print("Connection Failed, please restart program, and ensure connections are correct.")
 
 def info(mNum, speed):
    information = ''
+   link.connect(mNum, speed)
    information.append(link.core_cpu())
    information.append(link.core_id())
    information.append(link.core_name())
@@ -27,7 +32,11 @@ def info(mNum, speed):
 def bEndian(mNum, speed):
     pass
 
-def output(stream, mNum):
-    pass
+def output(mNum, stream):
+    filename = mNum
+    filename.append('.bin')
+    f = open(filename)
+    f.write(stream)
+
 
 link.close()
