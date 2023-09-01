@@ -18,11 +18,14 @@ def compare_files(file1, file2):
     with open(file1, 'rb') as f1:
         with open(file2, 'rb') as f2:
             return f1.read() == f2.read()
+        
+def src_path():
+    return 'AB-L18ER'
+
+def dest_path():
+    return 'testCPU.bin'
 
 
 def testAutoJlink(copy_file, compare_files):
-    src_file = 'AB-L18ER.bin'
-    dest_file = 'testCPU.bin'
-
-    copy_file(src_file, dest_file)
-    assert compare_files(src_file, dest_file), "Copied contents are not the same."
+    copy_file(src_path, dest_path)
+    assert compare_files(src_path, dest_path), "Copied contents are not the same."
