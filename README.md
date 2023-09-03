@@ -10,5 +10,5 @@ Usage:
 
 Support:
 
-Any CPUs supported by the Segger JLink, Jtrace, or JTrace Pro are supported here. A full compatibility list can be found [here][https://www.segger.com/supported-devices/jlink/]
+Any CPUs supported by the Segger JLink, Jtrace, or JTrace Pro are supported here. A full compatibility list can be found [here](https://www.segger.com/supported-devices/jlink/)
 
