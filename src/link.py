@@ -34,7 +34,20 @@ def info(mNum, speed):
     
 
 def bEndian(mNum, speed):
-    pass
+    link = pylink.JLink()
+    try: 
+        link.connect(mNum, speed)
+    except TypeError:
+        print("Speed invalid")
+    except all:
+        print("Connection Failed")
+    finally:
+        pass
+    if link.target_connected:
+        link.memory_read(0,0xF0000000) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
+    else:
+        print("Connection Failed, please restart program, and ensure connections are correct.")
+    link.close()
 
 def output(mNum, stream):
     link = pylink.JLink()
