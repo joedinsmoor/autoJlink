@@ -9,16 +9,20 @@ if speed == '':
     speed = 4000
 
 cpuInfo = info(modelNum, speed)
-print(cpuInfo)
+for inform in cpuInfo:
+    print(inform)
+    print("\n")
 
 
 file = 'out.bin'
 
 answer = input("Read Memory? (y/n)")
-if answer == 'yes':
+if answer == 'y' or 'yes':
+    print("Memory acquisition starting ...", flush=True)
     filename = lEndian(modelNum, speed)
+    print("Memory acquired, saved in ", filename)
 else:
     exit()
 
-print("Memory acquired, saved in %s", filename)
+
 

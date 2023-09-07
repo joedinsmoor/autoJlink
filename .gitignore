@@ -161,3 +161,4 @@ cython_debug/
 #.idea/
 JLinkARM.dll
 JLink_x64.dll
+*.bin

@@ -52,8 +52,11 @@ def info(mNum, speed):
    nlink.open(ip_addr='192.168.10.123:0')
    information = []
    nlink.connect(mNum)
+   information.append("CPU Serial Number:")
    information.append(nlink.core_cpu())
+   information.append("Core ID:")
    information.append(nlink.core_id())
+   information.append("Core Name:")
    information.append(nlink.core_name())
    nlink.close()
    return information
@@ -71,20 +74,31 @@ def bEndian(mNum, speed):
         Returns:
           ``None``
         """
+    size = 100
+
     link = pylink.JLink()
+    link.open(ip_addr='192.168.10.123:0')
     try: 
-        link.connect(mNum, speed)
+        link.connect(mNum)
     except TypeError:
         print("Speed invalid")
-    except all:
-        print("Connection Failed")
+    except pylink.JLinkException:
+        print("Connection Failed, please check connection and any relevant data")
     finally:
         pass
     if link.target_connected:
-        link.memory_read(0,0xF0000000) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
+        try:
+            while size != 10000000:
+                out = link.memory_read(0,size) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
+                size = size * 10
+        except pylink.JLinkException:
+            print("Memory could not be read, please verify connections and try again")
+        finally:
+            name = output(mNum, out)
     else:
         print("Connection Failed, please restart program, and ensure connections are correct.")
     link.close()
+    return name
 
 def output(mNum, stream):
     """Save retrieved memory to binary file with no bit manipulation.
@@ -98,9 +112,10 @@ def output(mNum, stream):
         """
     link = pylink.JLink()
     filename = mNum
-    filename.append('.bin')
-    f = open(filename)
-    f.write(stream)
+    filename = filename + '.bin'
+    f = open(filename, "w")
+    for out in stream:
+        f.write(out+"\n")
     link.close()
     return filename
 
