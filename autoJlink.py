@@ -11,9 +11,13 @@ if speed == '':
 cpuInfo = info(modelNum, speed)
 print(cpuInfo)
 
+
+file = 'out.bin'
+
 answer = input("Read Memory? (y/n)")
 if answer == 'yes':
     lEndian(modelNum, speed)
+    #output(modelNum, file)
 else:
     exit()
 

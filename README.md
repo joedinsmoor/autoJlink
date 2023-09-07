@@ -16,3 +16,7 @@ NOTE:
 
 If you have the python library PyLink installed, and you do not have PyLink-Square installed, uninstall and remove any trace of Pylink before installing and running this program. The naming conventions of these libraries causes unfixable issues, which I cannot change. 
 
+Troubleshooting:
+
+If an error like: ```TypeError: Expected to be given a valid DLL.``` happens on windows, you must add your JLink dll to path, or copy it to the autoJLink directory. A command to add it to path is: ```set PATH=%PATH%;path\to\jlink\dll\```
+
