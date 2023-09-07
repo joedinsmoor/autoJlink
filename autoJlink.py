@@ -16,9 +16,9 @@ file = 'out.bin'
 
 answer = input("Read Memory? (y/n)")
 if answer == 'yes':
-    lEndian(modelNum, speed)
-    #output(modelNum, file)
+    filename = lEndian(modelNum, speed)
 else:
     exit()
 
+print("Memory acquired, saved in %s", filename)
 

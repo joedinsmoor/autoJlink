@@ -13,26 +13,30 @@ def lEndian(mNum, speed):
           speed (int): JTAG Link speed in Khz
 
         Returns:
-          ``None``
+          ``Filename of memory acquired``
         """
 
     link = pylink.JLink()
-    link.open(serial_no, ip_addr)
+    link.open(ip_addr='192.168.10.123:0')
     try: 
-        link.connect(mNum, verbose=True)
+        link.connect(mNum)
     except TypeError:
         print("Speed invalid")
-    except all:
-        print("Connection Failed")
+    except pylink.JLinkException:
+        print("Connection Failed, please check connection and any relevant data")
     finally:
         pass
     if link.target_connected:
-        out = link.memory_read(0,0xF0000000) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
-        if output(mNum, out):
-            pass
+        try:
+            out = link.memory_read(0,0xF0000000) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
+        except pylink.JLinkException:
+            print("Memory could not be read, please verify connections and try again")
+        finally:
+            name = output(mNum, out)
     else:
         print("Connection Failed, please restart program, and ensure connections are correct.")
     link.close()
+    return name
 
 def info(mNum, speed):
    """Retrieve CPU information for quality assurance and general information purposes.
@@ -98,7 +102,7 @@ def output(mNum, stream):
     f = open(filename)
     f.write(stream)
     link.close()
-    return True
+    return filename
 
 # Method for saving memory to .bin file without any manipulation, ensuring a hygenic forensic acquisition. 
 
