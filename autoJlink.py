@@ -11,16 +11,23 @@ if speed == '':
 cpuInfo = info(modelNum, speed)
 for inform in cpuInfo:
     print(inform)
-    print("\n")
+    #print("\n")
 
-
+print("\n")
 file = 'out.bin'
 
-answer = input("Read Memory? (y/n)")
+answer = input("Read Memory? (y/n): ")
 if answer == 'y' or 'yes':
+    addr = input("Enter the starting address for memory acquisition: ")
+    length = input("Enter the length of acquisition in bits: ")
+    ans = input("Does CPU need to be halted for memory acquisition? If unknown, please hit enter (y/n): ")
+
     print("Memory acquisition starting ...", flush=True)
-    filename = lEndian(modelNum, speed)
-    print("Memory acquired, saved in ", filename)
+    filename = lEndian(modelNum, speed, addr, length, ans)
+    if(filename == 'Error'):
+        print("Could not save memory acquisition to file, please check connections and debugger")
+    else:
+        print("Memory acquired, saved in ", filename)
 else:
     exit()
 

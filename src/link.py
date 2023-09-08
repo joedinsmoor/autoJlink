@@ -1,18 +1,28 @@
 import pylink
 import csv
+import os
 
 
 ip_addr = '192.168.10.123:80'
 serial_no = 'None'
 
-def lEndian(mNum, speed):
+def lEndian(mNum, speed, saddr, length, ans):
     """Retrieve little endian formatted memory.
 
         Args:
-          mNum (str): CPU Model number for memory acquisition
-          speed (int): JTAG Link speed in Khz
+          mNum : str
+            CPU Model number for memory acquisition
+          speed : int
+            JTAG Link speed in Khz
+          saddr : int
+            Starting address for memory acquisition
+          length : int 
+            length of total acquisition in bits
+          ans : bool
+            flag for determining whether halt is necessary
 
         Returns:
+          filname : str
           ``Filename of memory acquired``
         """
 
@@ -27,12 +37,19 @@ def lEndian(mNum, speed):
     finally:
         pass
     if link.target_connected:
+        if ans == 'y':
+            res = link.halt()
         try:
-            out = link.memory_read(0,0xF0000000) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
+            out = link.memory_read(addr=saddr,num_units=length) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
         except pylink.JLinkException:
             print("Memory could not be read, please verify connections and try again")
         finally:
-            name = output(mNum, out)
+            try: 
+                name = output(mNum, out)
+            except MemoryError:
+                pass
+            finally:
+                return 'Error'
     else:
         print("Connection Failed, please restart program, and ensure connections are correct.")
     link.close()
@@ -52,6 +69,8 @@ def info(mNum, speed):
    nlink.open(ip_addr='192.168.10.123:0')
    information = []
    nlink.connect(mNum)
+   information.append("Debugger Information:")
+   information.append(nlink.connected_emulators(host=1))
    information.append("CPU Serial Number:")
    information.append(nlink.core_cpu())
    information.append("Core ID:")
@@ -116,6 +135,8 @@ def output(mNum, stream):
     f = open(filename, "w")
     for out in stream:
         f.write(out+"\n")
+    if(os.path.getsize(filename) == 0):
+        raise MemoryError
     link.close()
     return filename
 
