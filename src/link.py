@@ -8,7 +8,7 @@ serial_no = 'None'
 
 memSizes = "memSizes.json"
 
-memDict = json.load(memSizes)
+#memDict = json.load(memSizes)
 
 def lEndian(mNum, speed, saddr, length, ans):
     """Retrieve little endian formatted memory.
@@ -60,7 +60,7 @@ def lEndian(mNum, speed, saddr, length, ans):
     return name
 
 def info(mNum, speed):
-   """Retrieve CPU information for quality assurance and general information purposes.
+    """Retrieve CPU information for quality assurance and general information purposes.
 
         Args:
           mNum (str): CPU Model number for memory acquisition
@@ -69,20 +69,20 @@ def info(mNum, speed):
         Returns:
           ``Tuple of CPU Model, CPU ID, and CPU Name``
         """
-   nlink = pylink.JLink()
-   nlink.open(ip_addr='192.168.10.123:0')
-   information = []
-   nlink.connect(mNum)
-   information.append("Debugger Information:")
-   information.append(nlink.connected_emulators(host=1))
-   information.append("CPU Serial Number:")
-   information.append(nlink.core_cpu())
-   information.append("Core ID:")
-   information.append(nlink.core_id())
-   information.append("Core Name:")
-   information.append(nlink.core_name())
-   nlink.close()
-   return information
+    nlink = pylink.JLink()
+    nlink.open(ip_addr='192.168.10.123:0')
+    information = []
+    nlink.connect(mNum)
+    information.append("Debugger Information:")
+    information.append(nlink.connected_emulators(host=1))
+    information.append("CPU Serial Number:")
+    information.append(nlink.core_cpu())
+    information.append("Core ID:")
+    information.append(nlink.core_id())
+    information.append("Core Name:")
+    information.append(nlink.core_name())
+    nlink.close()
+    return information
 
 # Returns CPU information to ensure that user is debugging the correct architecture
     
