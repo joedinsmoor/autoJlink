@@ -1,10 +1,14 @@
 import pylink
-import csv
+import json
 import os
 
 
 ip_addr = '192.168.10.123:80'
 serial_no = 'None'
+
+memSizes = "memSizes.json"
+
+memDict = json.load(memSizes)
 
 def lEndian(mNum, speed, saddr, length, ans):
     """Retrieve little endian formatted memory.
