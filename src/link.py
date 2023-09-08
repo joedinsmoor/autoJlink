@@ -37,10 +37,10 @@ def lEndian(mNum, speed, saddr, length, ans):
     finally:
         pass
     if link.target_connected:
-        if ans == 'y':
+        if ans == 'y' or '':
             res = link.halt()
         try:
-            out = link.memory_read(addr=saddr,num_units=length) # - Reading memory up to 1.92 GB, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
+            out = link.memory_read(addr=saddr,num_units=length) # - Read specified amount of memory, future support for changing this memory address to dynamically handle different memory sizes based on CPU model number
         except pylink.JLinkException:
             print("Memory could not be read, please verify connections and try again")
         finally:
