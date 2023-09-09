@@ -18,8 +18,15 @@ file = 'out.bin'
 
 answer = input("Read Memory? (y/n): ")
 if answer == 'y' or 'yes':
-    addr = input("Enter the starting address for memory acquisition: ")
-    length = input("Enter the length of acquisition in bits: ")
+    with open(r'src/memSizes.json', 'r') as f:
+        sizes = json.loads(f)
+        if modelNum in sizes:
+            addr = 0
+            length = sizes[modelNum]
+        else:
+            addr = input("Enter the starting address for memory acquisition: ")
+            length = input("Enter the length of acquisition in bits: ")
+        
     ans = input("Does CPU need to be halted for memory acquisition? If unknown, please hit enter (y/n): ")
 
     print("Memory acquisition starting ...", flush=True)
