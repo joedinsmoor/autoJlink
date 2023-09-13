@@ -19,10 +19,14 @@ file = 'out.bin'
 answer = input("Read Memory? (y/n): ")
 if answer == 'y' or 'yes':
     with open(r'src/memSizes.json', 'r') as f:
-        sizes = json.loads(f)
+        try:
+            sizes = json.loads(f)
+        except TypeError:
+            sizes = ['LPC2101', 0xFF000000]
+            pass
         if modelNum in sizes:
             addr = 0
-            length = sizes[modelNum]
+            length = sizes[0]
         else:
             addr = input("Enter the starting address for memory acquisition: ")
             length = input("Enter the length of acquisition in bits: ")

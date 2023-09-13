@@ -23,7 +23,7 @@ def lEndian(mNum, speed, saddr, length, ans):
             flag for determining whether halt is necessary
 
         Returns:
-          filname : str
+          filename : str
           ``Filename of memory acquired``
         """
 
@@ -134,7 +134,7 @@ def output(mNum, stream):
     link = pylink.JLink()
     filename = mNum
     filename = filename + '.bin'
-    f = open(filename, "w")
+    f = open(filename, "wb")
     for out in stream:
         f.write(out+"\n")
     if(os.path.getsize(filename) == 0):
