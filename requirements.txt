@@ -6,7 +6,7 @@ opencv-python==4.8.0.74
 packaging==23.1
 pluggy==1.3.0
 pyasn1==0.5.0
-pycryptodome==3.18.0
+pycryptodome==3.19.1
 pyLink-square==1.2.0
 pyserial==3.5
 pytest==7.4.0
