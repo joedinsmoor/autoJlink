@@ -9,6 +9,6 @@ pyasn1==0.5.0
 pycryptodome==3.19.1
 pyLink-square==1.2.0
 pyserial==3.5
-pytest==7.4.0
+pytest==9.0.3
 rsa==4.9
 tomli==2.0.1
